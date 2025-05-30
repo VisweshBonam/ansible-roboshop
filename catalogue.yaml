@@ -1,0 +1,9 @@
+- name: configuring catalogue
+  hosts: backend
+  become: yes
+  tasks:
+
+  - name: installing nodejs 
+    ansible.builtin.dnf:
+      name: nodejs
+      state: present
