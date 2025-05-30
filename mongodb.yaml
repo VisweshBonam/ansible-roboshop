@@ -8,6 +8,7 @@
       src: mongo.repo
       dest: /etc/yum.repos.d/mongo.repo
 
-  # - name: installing mongodb server
-  #   ansible.builtin.dnf:
-  #     name: mongodb-org
+  - name: installing mongodb server
+    ansible.builtin.dnf:
+      name: mongodb-org
+      state: present
