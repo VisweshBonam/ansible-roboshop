@@ -1,9 +1,18 @@
-- name: configuring catalogue
-  hosts: backend
+- name: configuring catalogue component
+  hosts: catalogue
   become: yes
   tasks:
 
-  - name: installing nodejs 
+  - name: disabling nodejs module
+    ansible.builtin.command: dnf module disable nodejs -y
+
+  - name: enabling nodejs:20 module
+    ansible.builtin.command: dnf module enable nodejs:20 -yes
+
+  - name: install nodejs
     ansible.builtin.dnf:
       name: nodejs
       state: present
+
+
+      
