@@ -40,3 +40,18 @@
   - name: install dependencies
     community.general.npm:
       path: /app
+
+  - name: copying cart service
+    ansible.builtin.copy:
+      src: user.service
+      dest: /etc/sbin/nologin
+  
+  - name: daemon_reload cart
+    ansible.builtin.systemd_service:
+      daemon_reload: true
+
+  - name: start and enable cart
+    ansible.builtin.system:
+      name: cart
+      state: started
+      enabled: yes 
