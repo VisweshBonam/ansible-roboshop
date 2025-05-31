@@ -56,6 +56,28 @@
       state: started
       enabled: yes
 
+  
+  #load products data using mongodb-client
+
+  - name: copying mongo repo content
+    ansible.builtin.copy:
+      src: mongo.repo
+      dest: /etc/yum.repos.d/mongo.repo
+  
+  - name: install mongodb client
+    ansible.builtin.dnf:
+      name: mongodb-mongosh
+      state: present
+
+  - name: check products is loaded or not
+    ansible.builtin.command: mongosh --host mongodb.liveyourlife.site --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
+    register: catalogue_output
+
+  
+  - name: print catalogue_output
+    ansible.builtin.debug:
+      msg: "{{ catalogue_output }}"
+
 
 
       
