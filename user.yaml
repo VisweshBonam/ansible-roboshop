@@ -40,5 +40,20 @@
     - name: install dependencies
       community.general.npm:
         path: /app
+
+    - name: copying user service
+      ansible.builtin.copy:
+        src: user.service
+        dest: /etc/systemd/system/user.service
+
+    - name: daemon_reload user
+      ansible.builtin.systemd_service:
+        daemon_reload: true
+
+    - name: start and enable user
+      ansible.builtin.service:
+        name: user
+        state: started
+        enabled: yes
       
 
