@@ -1,5 +1,5 @@
 - name: configuring redis
-  hosts: redis
+  hosts:  redis
   become: yes
   tasks:
 
