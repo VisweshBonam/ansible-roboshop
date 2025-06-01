@@ -3,11 +3,11 @@
   become: yes
   tasks:
 
-  - name: disabling nodejs
-    ansible.builtin.command: dnf module disable nodejs -y
+  - name: disabling nginx
+    ansible.builtin.command: dnf module disable nginx -y
 
-  - name: enabling nodejs:1.24
-    ansible.builtin.command: dnf module enable nodejs:1.24 -y
+  - name: enabling nginx:1.24
+    ansible.builtin.command: dnf module enable nginx:1.24 -y
   
   - name: install nodejs
     ansible.builtin.dnf:
