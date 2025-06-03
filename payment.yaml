@@ -39,8 +39,8 @@
     ansible.builtin.pip:
       requirments: requirments.txt
       executable: pip3.9
-      args:
-        chdir: /app
+    args:
+      chdir: /app
 
   - name: copy payment service
     ansible.builtin.copy:
@@ -52,4 +52,3 @@
       name: payment
       state: started
       enabled: yes
-      
