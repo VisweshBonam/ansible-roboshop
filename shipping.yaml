@@ -5,8 +5,21 @@
 
   - name: install maven
     ansible.builtin.dnf:
-      name: maven
+      name: "{{ item }}"
       state: present
+    loop:
+    - maven
+    - mysql
+
+  - name: install pyMySQL
+    ansible.builtin.pip:
+      name: "{{ item }}"
+      executable: pip3.9
+
+    loop:
+    - PyMySQL
+    - cryptography
+
 
   - name: create /app directory
     ansible.builtin.file:
@@ -56,3 +69,22 @@
       name: shipping
       state: started
       enabled: yes
+
+  - name: import data
+    community.mysql.mysql_db:
+      login_user: root
+      login_password: RoboShop@1
+      login_host: mysql.liveyourlife.site
+      name: all
+      state: import
+      target: "{{ item }}"
+
+    loop:
+    - /app/db/schema.sql
+    - /app/db/app-user.sql
+    - /app/db/master-data.sql
+
+  - name: restart shipping
+    ansible.builtin.service:
+      name: shipping
+      state: restarted
